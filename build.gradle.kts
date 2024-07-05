@@ -2,6 +2,7 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.util.archivesName
 
 plugins {
     kotlin("jvm") version "1.9.23"
+    id("maven-publish")
 }
 
 group = "kr.eme.semiShop"
@@ -9,6 +10,7 @@ version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
+    mavenLocal()
     maven("https://repo.papermc.io/repository/maven-public/")
 }
 
@@ -30,5 +32,16 @@ tasks.jar {
     destinationDirectory = file("d:\\minecraft\\1. 버킷 관련\\1.20.2 paper_dev2\\plugins")
     manifest {
         attributes["main-class"] = "kr.eme.semiShop.SemiShop"
+    }
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            groupId = "kr.eme.semiShop"
+            artifactId = project.name
+            version = project.version.toString()
+            from(components["kotlin"])
+        }
     }
 }
