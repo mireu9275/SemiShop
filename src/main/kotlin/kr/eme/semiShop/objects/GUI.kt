@@ -45,6 +45,9 @@ abstract class GUI {
             player.openInventory(inventory)
         }
     }
+    fun close() {
+        sync { player.closeInventory() }
+    }
 
     fun onClick(e: InventoryClickEvent) { e.clickEvent() }
     fun onDrag(e: InventoryDragEvent) { e.dragEvent() }
